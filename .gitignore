@@ -1,0 +1,29 @@
+# Claude Code local settings
+.claude/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+
+# WordPress core & runtime (site is deployed onto an existing WP install;
+# we only version our own theme/plugin code, not WP core or uploads)
+wp-admin/
+wp-includes/
+wp-content/uploads/
+wp-content/upgrade/
+wp-content/cache/
+wp-content/plugins/*
+!wp-content/plugins/.gitkeep
+wp-*.php
+xmlrpc.php
+index.php
+wp-config.php
+!wp-content/themes/balford/**
+
+# Local env
+.env
+*.log
