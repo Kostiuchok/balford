@@ -8,7 +8,7 @@ get_header();
 	<div class="overlay"></div>
 	<div class="container">
 		<div class="row">
-			<div class="col-lg-12"><h4>Контакти</h4></div>
+			<div class="col-lg-12"><h4><?php the_title(); ?></h4></div>
 		</div>
 	</div>
 </section>
