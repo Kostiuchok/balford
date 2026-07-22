@@ -1,4 +1,4 @@
-# TODO — міграція balford.com.ua на WordPress
+# STATUS — міграція balford.com.ua на WordPress
 
 ## Контекст проєкту
 Мігруємо зі статичного сайту (`legacy-static/`) на WordPress — заради зручності
