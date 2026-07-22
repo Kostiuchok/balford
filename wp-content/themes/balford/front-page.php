@@ -4,8 +4,8 @@
  */
 get_header();
 
-$about_page    = get_page_by_path( 'about' );
-$ecology_page  = get_page_by_path( 'ecology' );
+$about_page   = balford_translated_page( 'about' );
+$ecology_page = balford_translated_page( 'ecology' );
 ?>
 
 <header data-background="<?php echo esc_url( get_template_directory_uri() . '/assets/img/header/23.jpg' ); ?>" class="intro introhalf">

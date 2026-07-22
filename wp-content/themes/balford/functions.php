@@ -103,6 +103,25 @@ function balford_register_strings() {
 add_action( 'init', 'balford_register_strings', 5 );
 
 /**
+ * get_page_by_path() only matches the uk-language slug (about/ecology/
+ * contacts); the en pages use different slugs (about-company etc), so
+ * resolve to the current language's translation via Polylang.
+ */
+function balford_translated_page( $uk_slug ) {
+	$page = get_page_by_path( $uk_slug );
+	if ( ! $page ) {
+		return null;
+	}
+	if ( function_exists( 'pll_get_post' ) ) {
+		$translated_id = pll_get_post( $page->ID );
+		if ( $translated_id ) {
+			return get_post( $translated_id );
+		}
+	}
+	return $page;
+}
+
+/**
  * Outputs breadcrumbs via Yoast SEO (already handles post-type archives,
  * translated page titles through Polylang, etc). No-op if Yoast is
  * inactive or breadcrumbs haven't been enabled in its settings.
@@ -128,8 +147,13 @@ function balford_default_menu() {
 
 	echo '<ul class="nav navbar-nav navbar-left">';
 	foreach ( $links as $slug => $label ) {
-		$page = get_page_by_path( $slug );
-		$url  = $page ? get_permalink( $page ) : home_url( '/' . $slug . '/' );
+		if ( 'news' === $slug ) {
+			$url = get_post_type_archive_link( 'news' );
+			$url = $url ?: home_url( '/news/' );
+		} else {
+			$page = balford_translated_page( $slug );
+			$url  = $page ? get_permalink( $page ) : home_url( '/' . $slug . '/' );
+		}
 		printf( '<li><a href="%s">%s</a></li>', esc_url( $url ), esc_html( $label ) );
 	}
 
