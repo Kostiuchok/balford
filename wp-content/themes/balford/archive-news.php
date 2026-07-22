@@ -8,7 +8,7 @@ get_header();
 	<div class="overlay"></div>
 	<div class="container">
 		<div class="row">
-			<div class="col-lg-12"><h4>Новини</h4></div>
+			<div class="col-lg-12"><h4><?php echo esc_html( balford__( 'Новини' ) ); ?></h4></div>
 		</div>
 	</div>
 </section>
@@ -23,7 +23,7 @@ get_header();
 						<h5><?php the_title(); ?></h5>
 					</a>
 					<p><?php echo esc_html( wp_trim_words( get_the_excerpt(), 20 ) ); ?></p>
-					<a href="<?php the_permalink(); ?>" class="btn btn-gray btn-xs">Читати більше</a>
+					<a href="<?php the_permalink(); ?>" class="btn btn-gray btn-xs"><?php echo esc_html( balford__( 'Читати більше' ) ); ?></a>
 				</div>
 			<?php endwhile; ?>
 		</div>

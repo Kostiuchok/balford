@@ -56,15 +56,61 @@ function balford_register_news_cpt() {
 add_action( 'init', 'balford_register_news_cpt' );
 
 /**
+ * Translates a theme UI string via Polylang if available, otherwise
+ * returns it unchanged. Use for hardcoded template strings that aren't
+ * tied to a WP post/page.
+ */
+function balford__( $string ) {
+	return function_exists( 'pll__' ) ? pll__( $string ) : $string;
+}
+
+/**
+ * Registers all theme UI strings (not tied to a WP post/page) with Polylang
+ * so they're translatable via Languages → Strings translation, and so
+ * pll__()/pll_e() calls throughout the theme resolve correctly.
+ */
+function balford_register_strings() {
+	if ( ! function_exists( 'pll_register_string' ) ) {
+		return;
+	}
+
+	$strings = array(
+		'nav_about'         => 'Про компанію',
+		'nav_news'          => 'Новини',
+		'nav_ecology'       => 'Екологія',
+		'nav_contacts'      => 'Контакти',
+		'hero_company'      => 'ТОВ «БАЛФОРД УКРАЇНА»',
+		'hero_location'     => 'річка Стрий, с. Довге-Гірське',
+		'hero_tagline'      => 'Сучасні технології та інвестиції в майбутнє',
+		'about_heading'     => 'Про компанію',
+		'read_more'         => 'Читати більше',
+		'news_heading'      => 'Новини',
+		'news_intro'        => 'В даному розділі зібрані всі головні новини і події компанії Балфорд Україна',
+		'all_news'          => 'Усі новини',
+		'ecology_heading'   => 'Екологія',
+		'ecology_intro'     => 'В даному розділі зібрані всі головні новини з екології та природних ресурсів',
+		'learn_more'        => 'Детальніше',
+		'back_to_news'      => '← Усі новини',
+		'footer_address'    => 'с. Довге, Львівської області, Україна.',
+		'footer_company'    => 'ТОВ "Балфорд Україна"',
+	);
+
+	foreach ( $strings as $name => $string ) {
+		pll_register_string( $name, $string, 'Balford Theme' );
+	}
+}
+add_action( 'init', 'balford_register_strings', 5 );
+
+/**
  * Fallback menu used until a menu is assigned to the "primary" location
  * in Зовнішній вигляд → Меню. Links by page slug (about, news, ecology, contacts).
  */
 function balford_default_menu() {
 	$links = array(
-		'about'    => 'Про компанію',
-		'news'     => 'Новини',
-		'ecology'  => 'Екологія',
-		'contacts' => 'Контакти',
+		'about'    => balford__( 'Про компанію' ),
+		'news'     => balford__( 'Новини' ),
+		'ecology'  => balford__( 'Екологія' ),
+		'contacts' => balford__( 'Контакти' ),
 	);
 
 	echo '<ul class="nav navbar-nav navbar-left">';

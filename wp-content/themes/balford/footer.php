@@ -14,12 +14,12 @@
 			<div class="col-md-4">
 				<p>
 					<i class="fa fa-phone fa-fw"></i> +38 (050) 330 38 16<br>
-					<i class="fa fa-map-marker fa-fw"></i> с. Довге, Львівської області, Україна.<br>
+					<i class="fa fa-map-marker fa-fw"></i> <?php echo esc_html( balford__( 'с. Довге, Львівської області, Україна.' ) ); ?><br>
 					<i class="fa fa-envelope fa-fw"></i> info@balfordukraine.com.ua<br>
 				</p>
 			</div>
 			<div class="col-md-3">
-				<p>&copy; <?php echo esc_html( date( 'Y' ) ); ?> ТОВ "Балфорд Україна"</p>
+				<p>&copy; <?php echo esc_html( date( 'Y' ) ); ?> <?php echo esc_html( balford__( 'ТОВ "Балфорд Україна"' ) ); ?></p>
 			</div>
 		</div>
 	</div>
