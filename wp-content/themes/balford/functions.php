@@ -80,6 +80,7 @@ function balford_register_strings() {
 		'nav_ecology'       => 'Екологія',
 		'nav_contacts'      => 'Контакти',
 		'hero_company'      => 'ТОВ «БАЛФОРД УКРАЇНА»',
+		'hero_headline'     => 'АЛЬТЕРНАТИВНА ГІДРОЕНЕРГІЯ',
 		'hero_location'     => 'річка Стрий, с. Довге-Гірське',
 		'hero_tagline'      => 'Сучасні технології та інвестиції в майбутнє',
 		'about_heading'     => 'Про компанію',
@@ -119,11 +120,25 @@ function balford_default_menu() {
 		$url  = $page ? get_permalink( $page ) : home_url( '/' . $slug . '/' );
 		printf( '<li><a href="%s">%s</a></li>', esc_url( $url ), esc_html( $label ) );
 	}
-	echo '</ul>';
 
 	if ( function_exists( 'pll_the_languages' ) ) {
-		echo '<ul class="nav navbar-nav navbar-left">';
-		pll_the_languages( array( 'raw' => 0 ) );
-		echo '</ul>';
+		$languages   = pll_the_languages( array( 'raw' => 1 ) );
+		$short_label = array( 'uk' => 'Укр', 'en' => 'Eng' );
+		$current     = 'Укр';
+		foreach ( (array) $languages as $language ) {
+			if ( ! empty( $language['current_lang'] ) ) {
+				$current = $short_label[ $language['slug'] ] ?? strtoupper( $language['slug'] );
+			}
+		}
+
+		echo '<li class="menu-divider visible-lg">&nbsp;</li>';
+		echo '<li class="dropdown"><a href="#" class="dropdown-toggle"><span class="lang">' . esc_html( $current ) . '</span><span class="caret"></span></a>';
+		echo '<ul class="dropdown-menu">';
+		foreach ( (array) $languages as $language ) {
+			printf( '<li><a href="%s">%s</a></li>', esc_url( $language['url'] ), esc_html( $language['name'] ) );
+		}
+		echo '</ul></li>';
 	}
+
+	echo '</ul>';
 }

@@ -11,6 +11,7 @@ $ecology_page  = get_page_by_path( 'ecology' );
 <header data-background="<?php echo esc_url( get_template_directory_uri() . '/assets/img/header/23.jpg' ); ?>" class="intro introhalf">
 	<div class="intro-body">
 		<h5><?php echo esc_html( balford__( 'ТОВ «БАЛФОРД УКРАЇНА»' ) ); ?></h5>
+		<h1><?php echo esc_html( balford__( 'АЛЬТЕРНАТИВНА ГІДРОЕНЕРГІЯ' ) ); ?></h1>
 		<h4><?php echo esc_html( balford__( 'річка Стрий, с. Довге-Гірське' ) ); ?></h4>
 		<h4><?php echo esc_html( balford__( 'Сучасні технології та інвестиції в майбутнє' ) ); ?></h4>
 	</div>
@@ -19,12 +20,24 @@ $ecology_page  = get_page_by_path( 'ecology' );
 <section id="about">
 	<div class="container">
 		<div class="row">
-			<div class="col-lg-8">
+			<div class="col-lg-5">
 				<h3><?php echo esc_html( balford__( 'Про компанію' ) ); ?></h3>
 				<?php if ( $about_page ) : ?>
 					<?php echo wp_kses_post( wpautop( wp_trim_words( $about_page->post_content, 60 ) ) ); ?>
 					<p><a href="<?php echo esc_url( get_permalink( $about_page ) ); ?>" class="btn btn-gray btn-xs"><?php echo esc_html( balford__( 'Читати більше' ) ); ?></a></p>
 				<?php endif; ?>
+			</div>
+			<div class="col-lg-6 col-lg-offset-1">
+				<div id="carousel-light" class="carousel slide carousel-fade">
+					<ol class="carousel-indicators">
+						<li data-target="#carousel-light" data-slide-to="0" class="active"></li>
+						<li data-target="#carousel-light" data-slide-to="1"></li>
+					</ol>
+					<div role="listbox" class="carousel-inner">
+						<div class="item active"><img src="<?php echo esc_url( get_template_directory_uri() . '/assets/img/slider/2.png' ); ?>" alt="" class="img-responsive center-block"></div>
+						<div class="item"><img src="<?php echo esc_url( get_template_directory_uri() . '/assets/img/slider/1.png' ); ?>" alt="" class="img-responsive center-block"></div>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -87,7 +100,14 @@ $ecology_page  = get_page_by_path( 'ecology' );
 <section id="eco" class="bg-gray">
 	<div class="container">
 		<div class="row">
-			<div class="col-md-8">
+			<div class="col-md-5">
+				<div id="carousel-light3" data-ride="carousel" class="carousel slide carousel-fade">
+					<div role="listbox" class="carousel-inner">
+						<div class="item active"><img src="<?php echo esc_url( get_template_directory_uri() . '/assets/img/portfolio/1.jpg' ); ?>" alt=""></div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-6 col-md-offset-1">
 				<?php if ( $ecology_page ) : ?>
 					<h3><?php echo esc_html( get_the_title( $ecology_page ) ); ?></h3>
 					<?php echo wp_kses_post( wpautop( wp_trim_words( $ecology_page->post_content, 60 ) ) ); ?>
