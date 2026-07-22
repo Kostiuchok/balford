@@ -103,6 +103,18 @@ function balford_register_strings() {
 add_action( 'init', 'balford_register_strings', 5 );
 
 /**
+ * Outputs breadcrumbs via Yoast SEO (already handles post-type archives,
+ * translated page titles through Polylang, etc). No-op if Yoast is
+ * inactive or breadcrumbs haven't been enabled in its settings.
+ */
+function balford_breadcrumbs() {
+	if ( ! function_exists( 'yoast_breadcrumb' ) ) {
+		return;
+	}
+	yoast_breadcrumb( '<nav class="breadcrumbs" aria-label="breadcrumb"><div class="container">', '</div></nav>' );
+}
+
+/**
  * Fallback menu used until a menu is assigned to the "primary" location
  * in Зовнішній вигляд → Меню. Links by page slug (about, news, ecology, contacts).
  */

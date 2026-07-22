@@ -13,6 +13,8 @@ get_header();
 	</div>
 </section>
 
+<?php balford_breadcrumbs(); ?>
+
 <section id="about">
 	<div class="container">
 		<?php while ( have_posts() ) : the_post(); ?>

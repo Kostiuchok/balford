@@ -13,6 +13,8 @@ get_header();
 	</div>
 </section>
 
+<?php balford_breadcrumbs(); ?>
+
 <section class="section-small">
 	<div class="container">
 		<div class="row grid-pad">
