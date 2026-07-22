@@ -1004,6 +1004,17 @@ input[type=checkbox], input[type=radio] {
 .grid-pad div[class*="col-"] {
   margin-bottom: 40px; }
 
+/* Bootstrap 3 float columns of unequal height don't wrap into clean rows
+   on their own; force a clear at the start of each row per breakpoint
+   (2-up on sm, 4-up on md+) so cards line up instead of staggering. */
+.grid-pad div[class*="col-"]:nth-child(2n+1) {
+  clear: left; }
+@media (min-width: 992px) {
+  .grid-pad div[class*="col-"]:nth-child(2n+1) {
+    clear: none; }
+  .grid-pad div[class*="col-"]:nth-child(4n+1) {
+    clear: left; } }
+
 #news-single .carousel {
   padding-bottom: 20px; }
 
