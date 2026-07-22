@@ -17,7 +17,14 @@ get_header();
 	<div class="container">
 		<?php while ( have_posts() ) : the_post(); ?>
 			<div class="row">
-				<div class="col-lg-8">
+				<div class="col-md-5">
+					<div id="carousel-eco-page" data-ride="carousel" class="carousel slide carousel-fade">
+						<div role="listbox" class="carousel-inner">
+							<div class="item active"><img src="<?php echo esc_url( get_template_directory_uri() . '/assets/img/portfolio/1.jpg' ); ?>" alt=""></div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6 col-md-offset-1">
 					<?php the_content(); ?>
 				</div>
 			</div>
