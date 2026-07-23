@@ -19,7 +19,8 @@ function balford_assets() {
 	wp_enqueue_style( 'balford-font-awesome', $theme_uri . '/assets/css/font-awesome.min.css' );
 	wp_enqueue_style( 'balford-ionicons', $theme_uri . '/assets/css/ionicons.min.css' );
 	wp_enqueue_style( 'balford-swipebox', $theme_uri . '/assets/css/swipebox.css' );
-	wp_enqueue_style( 'balford-main', $theme_uri . '/assets/css/pheromone.css' );
+	wp_enqueue_style( 'balford-main', $theme_uri . '/assets/css/pheromone.css', array(), filemtime( get_template_directory() . '/assets/css/pheromone.css' ) );
+	wp_enqueue_style( 'balford-style', get_stylesheet_uri(), array( 'balford-main' ), filemtime( get_template_directory() . '/style.css' ) );
 
 	wp_enqueue_script( 'balford-jquery', $theme_uri . '/assets/js/jquery-1.12.3.min.js', array(), null, true );
 	wp_enqueue_script( 'balford-bootstrap', $theme_uri . '/assets/js/bootstrap.min.js', array( 'balford-jquery' ), null, true );
@@ -32,7 +33,7 @@ function balford_assets() {
 	wp_enqueue_script( 'balford-smoothscroll', $theme_uri . '/assets/js/smoothscroll.min.js', array(), null, true );
 	wp_enqueue_script( 'balford-smartmenus', $theme_uri . '/assets/js/jquery.smartmenus.js', array( 'balford-jquery' ), null, true );
 	wp_enqueue_script( 'balford-wow', $theme_uri . '/assets/js/wow.min.js', array(), null, true );
-	wp_enqueue_script( 'balford-main', $theme_uri . '/assets/js/pheromone.js', array( 'balford-jquery' ), null, true );
+	wp_enqueue_script( 'balford-main', $theme_uri . '/assets/js/pheromone.js', array( 'balford-jquery' ), filemtime( get_template_directory() . '/assets/js/pheromone.js' ), true );
 }
 add_action( 'wp_enqueue_scripts', 'balford_assets' );
 

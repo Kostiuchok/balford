@@ -5,3 +5,141 @@ Author: Balford
 Version: 1.0
 Text Domain: balford
 */
+
+/* Mobile nav fix: the emblem logo (logo.svg, ~square) is rendered at
+   100px wide / ~97px tall via .logo in pheromone.css, which is much
+   taller than the navbar row. On mobile the toggle menu drops directly
+   below the header in normal flow, so without extra clearance the logo
+   visually overlaps the opened menu. */
+@media (max-width: 990px) {
+	.navbar-custom .navbar-header {
+		display: flex;
+		align-items: center;
+		width: 100%;
+		margin: 0;
+	}
+
+	.navbar-custom .navbar-brand {
+		float: none;
+		order: 1;
+		margin: 0;
+		padding-top: 0;
+		padding-bottom: 0;
+		display: flex;
+		align-items: center;
+	}
+
+	/* pheromone.css also bumps .navbar-brand's padding-top to 18px once
+	   .top-nav-collapse is added on scroll (desktop "shrink on scroll"
+	   effect) — that's more specific than the rule above, so it wins
+	   and visibly nudges the logo down mid-scroll. Pin it back to 0. */
+	.navbar-custom.top-nav-collapse .navbar-brand {
+		padding-top: 0;
+		display: flex;
+		align-items: center;
+	}
+
+	/* Cap the logo to a normal navbar icon size on mobile instead of
+	   its near-square 100px-wide (~97px tall) desktop rendering, so it
+	   physically cannot be taller than the header row it sits in.
+	   Explicit width+height (not width:auto) because logo.svg's root
+	   <svg> has no width/height attribute, only a viewBox — some
+	   browsers fail to derive the intrinsic aspect ratio for an <img>
+	   in that case and render it at 0 width when only height/max-height
+	   is constrained. */
+	.navbar-custom .logo {
+		width: 41px;
+		height: 40px;
+	}
+
+	/* pheromone.css shrinks the logo to max-width:60% once .top-nav-collapse
+	   is added on scroll (desktop "shrink on scroll" effect) — on mobile
+	   that visibly shrinks the already-small 41px logo mid-scroll. Keep
+	   it a fixed size regardless of scroll state. */
+	.navbar-custom.top-nav-collapse .navbar-brand .logo {
+		width: 41px;
+		max-width: 41px;
+	}
+
+	.navbar-custom .navbar-toggle {
+		float: none;
+		order: 2;
+		margin: 0 0 0 auto;
+	}
+
+	/* Inner-page title banners (.bg-img2/3/4 on page-about/ecology/
+	   contacts/single-news/archive-news) sit directly after the fixed
+	   nav in the markup, with nothing reserving space for it — the
+	   ~51px-tall navbar covers the banner. margin-top (not padding-top)
+	   because the banner's background-image is painted on the section
+	   itself: padding only pushes the inner text down while the
+	   background still starts at y:0 and stays hidden under the nav.
+	   margin-top moves the whole section, background included. Just
+	   enough to clear the nav — no extra gap, which read as a stray
+	   blank white bar rather than deliberate spacing. The homepage hero
+	   isn't targeted here: it already has 170px of its own top padding,
+	   comfortably clearing the nav on its own. */
+	.navbar-fixed-top + section {
+		margin-top: 51px;
+		display: flex;
+		align-items: center;
+	}
+
+	/* h1-h6 get a global margin:0 0 35px in pheromone.css. Inside the
+	   flex-centered banner above, that leftover bottom margin still
+	   counts toward the container's height, so the title sits visibly
+	   above center instead of dead center. */
+	.navbar-fixed-top + section h4 {
+		margin: 0;
+	}
+}
+
+/* pheromone.css sets .logo { margin: -10px } on all four sides. That
+   negative margin (including top/bottom) makes the logo visually taller
+   than the flex row's computed height, bleeding past navbar-header's
+   bottom edge and eating into the clearance before the opened mobile
+   menu. Drop the negative margin entirely so navbar-header's height
+   matches the logo's real size and the collapse's margin-top above is
+   the actual gap. */
+.navbar-custom .logo {
+	margin: 0;
+}
+
+/* .intro (the hero banner) uses display:table with no table-layout set,
+   so it defaults to table-layout:auto — the browser grows the table
+   wider than its own width:100% to fit any content that can't wrap,
+   ignoring overflow:hidden (the box itself grows, there's nothing left
+   to clip). The hero h1/h4/h5 are long unbroken words on narrow phones
+   ("АЛЬТЕРНАТИВНА", "ГІДРОЕНЕРГІЯ") and were pushing the whole banner
+   past the screen edge. Force the table to respect its declared width,
+   and let long words break instead of forcing extra width. */
+.intro {
+	table-layout: fixed;
+}
+
+/* pheromone.css has two equal-specificity, equal-!important rules
+   fighting over height: .intro sets height:100%, .introhalf (the
+   second class on the same hero element) sets height:auto. Which one
+   wins depends on source order and is easy to get wrong reading the
+   cascade by eye. Pin it unambiguously with a higher-specificity
+   compound selector: the hero must size to its content, not the full
+   viewport, or it takes several swipes just to scroll past it. */
+.intro.introhalf {
+	height: auto !important;
+}
+
+.intro-body h1,
+.intro-body h4,
+.intro-body h5 {
+	overflow-wrap: break-word;
+	word-break: break-word;
+}
+
+/* Requested: hero h1 ~10% smaller on mobile so "АЛЬТЕРНАТИВНА" /
+   "ГІДРОЕНЕРГІЯ" fit on one line each instead of breaking mid-word. */
+@media (max-width: 768px) {
+	.intro h1 {
+		font-size: 28px;
+		line-height: 38px;
+	}
+}

@@ -12,7 +12,7 @@
 	<link rel="shortcut icon" href="<?php echo esc_url( get_template_directory_uri() . '/assets/img/misc/favicon.png' ); ?>">
 	<?php wp_head(); ?>
 </head>
-<body <?php body_class( 'top' ); ?> id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
+<body <?php body_class( 'top' ); ?> id="page-top">
 <div id="preloader"><div id="status"></div></div>
 
 <nav class="navbar navbar-custom navbar-fixed-top">

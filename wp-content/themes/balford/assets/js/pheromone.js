@@ -32,9 +32,9 @@
             buildModuleHeader(introHeader);
         });
 
-        $(window).scroll(function() {
-            effectsModuleHeader(introHeader, this);
-        });
+        // Decorative hero parallax (top-offset + fade-out on scroll) was
+        // disabled: it fights native touch scrolling, especially right
+        // at the hero/next-section boundary.
 
         intro.each(function(i) {
             if ($(this).attr('data-background')) {
@@ -60,25 +60,10 @@
          * jQuery Parallax
          ***********************************************/
 
-        $('.bg-img').parallax("50%", .11);
-        $('.bg-img2').parallax("50%", .12);
-        $('.bg-img3').parallax("50%", .12);
-        $('.bg-img4').parallax("50%", .14);
-
-        /***********************************************
-         * Twitter Widget
-         ***********************************************/
-
-        $('#tweecool').tweecool({
-            username : 'jenyelkind',
-            action_reply_icon: '<i class="fa fa-reply"></i>',
-            action_retweet_icon: '<i class="fa fa-retweet"></i>',
-            action_favorite_icon: '<i class="fa fa-heart"></i>',
-            limit : 1,
-            profile_image : false,
-            show_time : false,
-            show_actions : true
-        });
+        // Background parallax (jquery.parallax.min.js) was disabled: it
+        // binds an unthrottled scroll handler that forces a layout read
+        // on every tick, a decorative desktop-only effect not worth the
+        // scroll-jank risk.
 
         /***********************************************
          * jQuery to collapse the navbar on scroll
@@ -108,15 +93,6 @@
 
 
         /***********************************************
-         * Highlight the top nav as scrolling occurs
-         ***********************************************/
-
-        $('body').scrollspy({
-            target: '.navbar-fixed-top',
-            offset: 65
-        })
-
-        /***********************************************
          * Closes the Responsive Menu on Menu Item Click in One Page Nav
          ***********************************************/
 
@@ -131,44 +107,6 @@
         $('ul.nav a').filter(function () {
             return this.href == url;
         }).parent().addClass('active');
-
-        /***********************************************
-         * Countdown
-         ***********************************************/
-
-        $('#clock').countdown('2017/01/21 11:00:00').on('update.countdown', function (event) {
-            var $this = $(this).html(event.strftime(''
-                + '<div><span>%-w</span>week%!w</div>'
-                + '<div><span>%-d</span>day%!d</div>'
-                + '<div><span>%H</span>hr</div>'
-                + '<div><span>%M</span>min</div>'
-                + '<div><span>%S</span>sec</div>'));
-        });
-
-        $('#clock2').countdown('2017/03/22 12:00:00').on('update.countdown', function (event) {
-            var $this = $(this).html(event.strftime(''
-                + '<div><span>%-w</span>week%!w</div>'
-                + '<div><span>%-d</span>day%!d</div>'
-                + '<div><span>%H</span>hr</div>'
-                + '<div><span>%M</span>min</div>'
-                + '<div><span>%S</span>sec</div>'));
-        });
-        $('#clock3').countdown('2017/04/25 13:00:00').on('update.countdown', function (event) {
-            var $this = $(this).html(event.strftime(''
-                + '<div><span>%-w</span>week%!w</div>'
-                + '<div><span>%-d</span>day%!d</div>'
-                + '<div><span>%H</span>hr</div>'
-                + '<div><span>%M</span>min</div>'
-                + '<div><span>%S</span>sec</div>'));
-        });
-        $('#clock4').countdown('2017/05/27 14:00:00').on('update.countdown', function (event) {
-            var $this = $(this).html(event.strftime(''
-                + '<div><span>%-w</span>week%!w</div>'
-                + '<div><span>%-d</span>day%!d</div>'
-                + '<div><span>%H</span>hr</div>'
-                + '<div><span>%M</span>min</div>'
-                + '<div><span>%S</span>sec</div>'));
-        });
 
         /***********************************************
          * Carousel
@@ -197,30 +135,6 @@
          ***********************************************/
 
         new WOW().init();
-
-        /***********************************************
-         * Circle Chart
-        ***********************************************/
-
-        var el = $('.circle'),
-            inited = false;
-        el.appear({ force_process: true });
-        el.on('appear', function() {
-            if (!inited) {
-                el.circleProgress();
-                inited = true;
-            }
-        });
-
-        $('.circle').circleProgress({
-                size:100,
-                fill: {color: "#777"},
-                startAngle: 300,
-                animation: {duration: 4000}
-            })
-            .on('circle-animation-progress', function (event, progress, stepValue) {
-                $(this).find('span').text((stepValue * 100).toFixed(1));
-            });
 
         /***********************************************
          * Progress Bar
