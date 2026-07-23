@@ -135,6 +135,41 @@ Text Domain: balford
 	word-break: break-word;
 }
 
+/* Inner-page title banners (.bg-img2/3/4 on page-about/ecology/contacts/
+   single-news/archive-news, matched here via "immediately after the fixed
+   nav" so the homepage's later bg-img3/4 teaser sections aren't affected)
+   render as a thin .section-small (80px/80px padding, one line of title).
+   Rather than guessing a min-height to match the homepage hero (its height
+   isn't fixed — it moves with viewport width as the headline wraps onto a
+   different number of lines), reuse the exact padding the homepage hero
+   itself is built on (.intro .intro-body's 170px/80px), so this banner's
+   height comes from the same rule and tracks viewport width the same way,
+   with no cross-page number to keep in sync. The homepage hero's 170/80
+   split is asymmetric because 170px exists to clear the fixed nav while
+   80px is just breathing room before the next section — on the homepage
+   that's invisible under 4 stacked lines of content, but this banner is a
+   single line, so the same split leaves it glued to the top with 80px of
+   dead space below. Keep the same total (170+80=250px, still tracking
+   viewport width the same way) but split it evenly so a one-line title
+   actually sits centered; 125px still clears the nav with room to spare.
+   Desktop only: the mobile version of this banner was already tuned to
+   be just tall enough to clear the nav, and 125px top would eat most of
+   a phone screen. */
+@media (min-width: 991px) {
+	.navbar-fixed-top + section {
+		padding-top: 125px;
+		padding-bottom: 125px;
+	}
+
+	/* h1-h6 get a global margin: 0 0 35px in pheromone.css; that leftover
+	   bottom margin on the title would still throw off the symmetric
+	   padding above. Scoped to this banner's h4 only — doesn't touch
+	   headings anywhere else. */
+	.navbar-fixed-top + section h4 {
+		margin: 0;
+	}
+}
+
 /* Requested: hero h1 ~10% smaller on mobile so "АЛЬТЕРНАТИВНА" /
    "ГІДРОЕНЕРГІЯ" fit on one line each instead of breaking mid-word. */
 @media (max-width: 768px) {
